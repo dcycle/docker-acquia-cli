@@ -20,6 +20,13 @@ Example usage
     docker run --rm -e ACLI_KEY="$ACLIKEY" -e ACLI_SECRET="$ACLISECRET" \
         dcycle/acquia-cli:1 api:accounts:find
 
+Example: changing the tag for an environment
+-----
+
+Let's say you have an Application called XYZ, and you want to change its "Stage" environment code tag to tags/abc:
+
+
+
 More resources
 -----
 
