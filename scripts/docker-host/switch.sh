@@ -38,7 +38,7 @@ OUTPUT="ERROR"
 TRIES=15
 for i in `seq 1 "$TRIES"`;
 do
-  OUTPUT=$(docker run --rm -e ACLI_KEY="$ACLIKEY" -e ACLI_SECRET="$ACLISECRET" dcycle/acquia-cli:1 api:environments:find "$ACQUIAAPP.$ACQUIAENV" | grep "22$ACQUIATAG" || "ERROR")
+  OUTPUT=$(docker run --rm -e ACLI_KEY="$ACLIKEY" -e ACLI_SECRET="$ACLISECRET" dcycle/acquia-cli:1 api:environments:find "$ACQUIAAPP.$ACQUIAENV" | grep "22$ACQUIATAG" || echo "ERROR")
   if [[ "$OUTPUT" == *"ERROR"* ]]; then
     if [ "$i" == "$TRIES" ];then
       echo "After $TRIES tries, the environment code tag could not be changed."
