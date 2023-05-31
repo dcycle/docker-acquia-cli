@@ -1,14 +1,9 @@
 #!/bin/bash
 #
-# Switch code on a Docker host.
+# Switch code on Jenkins with access to a Docker host.
 #
 set -e
 
-ACQUIAAPP="$1"
-ACQUIAENV="$2"
-ACQUIATAG="$3"
-ACLIKEY="$4"
-ACLISECRET="$5"
 if [ -z "$ACQUIAAPP" ]; then
   >&2 echo "Please make sure the ACQUIAAPP environment variable exists, with something like 'myapp'."
   exit 1
@@ -29,6 +24,14 @@ if [ -z "$ACLISECRET" ]; then
   >&2 echo "Please make sure the ACLISECRET environment variable exists, with something like 'ABC123'."
   exit 1
 fi
+if [ -z "$DOCKERHOSTUSER" ]; then
+  >&2 echo "Please make sure the DOCKERHOSTUSER environment variable exists, with something like 'not-root'."
+  exit 1
+fi
+if [ -z "$DOCKERHOST" ]; then
+  >&2 echo "Please make sure the DOCKERHOST environment variable exists, with something like 'docker.example.com'."
+  exit 1
+fi
 
- docker run --rm -e ACLI_KEY="$ACLIKEY" -e ACLI_SECRET="$ACLISECRET" dcycle/acquia-cli:1 api:environments:code-switch "$ACQUIAAPP.$ACQUIAENV" tags/"$ACQUIATAG"
-
+scp ./scripts/docker-host/switch.sh "$DOCKERHOSTUSER@$DOCKERHOST":dcycle-docker-acquia-cli-switch.sh
+ssh "$DOCKERHOSTUSER@$DOCKERHOST" "./dcycle-docker-acquia-cli-switch.sh $ACQUIAAPP $ACQUIAENV $ACQUIATAG $ACLIKEY $ACLISECRET"
