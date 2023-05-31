@@ -31,14 +31,14 @@ if [ -z "$ACLISECRET" ]; then
   exit 1
 fi
 
- docker run --rm -e ACLI_KEY="$ACLIKEY" -e ACLI_SECRET="$ACLISECRET" dcycle/acquia-cli:1 api:environments:code-switch "$ACQUIAAPP.$ACQUIAENV" tags/"$ACQUIATAG"
+docker run --rm -e ACLI_KEY="$ACLIKEY" -e ACLI_SECRET="$ACLISECRET" dcycle/acquia-cli:1 api:environments:code-switch "$ACQUIAAPP.$ACQUIAENV" tags/"$ACQUIATAG"
 
 echo "Will try a max of 15 times to confirm that tag $ACQUIATAG has been properly deployed."
 OUTPUT="ERROR"
 TRIES=15
 for i in `seq 1 "$TRIES"`;
 do
-  OUTPUT=$(docker run --rm -e ACLI_KEY="$ACLIKEY" -e ACLI_SECRET="$ACLISECRET" dcycle/acquia-cli:1 api:environments:find "$ACQUIAENV" | grep "$ACQUIATAG" || "ERROR")
+  OUTPUT=$(docker run --rm -e ACLI_KEY="$ACLIKEY" -e ACLI_SECRET="$ACLISECRET" dcycle/acquia-cli:1 api:environments:find "$ACQUIAAPP.$ACQUIAENV" | grep "$ACQUIATAG" || "ERROR")
   if [[ "$OUTPUT" == *"ERROR"* ]]; then
     if [ "$i" == "$TRIES" ];then
       echo "After $TRIES tries, the environment code tag could not be changed."
