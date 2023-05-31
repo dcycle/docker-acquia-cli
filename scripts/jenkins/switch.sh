@@ -4,32 +4,34 @@
 #
 set -e
 
+SCRIPT=scripts/jenkins/switch.sh
+
 if [ -z "$ACQUIAAPP" ]; then
-  >&2 echo "Please make sure the ACQUIAAPP environment variable exists, with something like 'myapp'."
+  >&2 echo "$SCRIPT: Please make sure the ACQUIAAPP environment variable exists, with something like 'myapp'."
   exit 1
 fi
 if [ -z "$ACQUIAENV" ]; then
-  >&2 echo "Please make sure the ACQUIAENV environment variable exists, with something like 'dev'."
+  >&2 echo "$SCRIPT: Please make sure the ACQUIAENV environment variable exists, with something like 'dev'."
   exit 1
 fi
 if [ -z "$ACQUIATAG" ]; then
-  >&2 echo "Please make sure the ACQUIATAG environment variable exists, with something like 'some-git-tag-to-switch-to'."
+  >&2 echo "$SCRIPT: Please make sure the ACQUIATAG environment variable exists, with something like 'some-git-tag-to-switch-to'."
   exit 1
 fi
 if [ -z "$ACLIKEY" ]; then
-  >&2 echo "Please make sure the ACLIKEY environment variable exists, with something like 'ABC123'."
+  >&2 echo "$SCRIPT: Please make sure the ACLIKEY environment variable exists, with something like 'ABC123'."
   exit 1
 fi
 if [ -z "$ACLISECRET" ]; then
-  >&2 echo "Please make sure the ACLISECRET environment variable exists, with something like 'ABC123'."
+  >&2 echo "$SCRIPT: Please make sure the ACLISECRET environment variable exists, with something like 'ABC123'."
   exit 1
 fi
 if [ -z "$DOCKERHOSTUSER" ]; then
-  >&2 echo "Please make sure the DOCKERHOSTUSER environment variable exists, with something like 'not-root'."
+  >&2 echo "$SCRIPT: Please make sure the DOCKERHOSTUSER environment variable exists, with something like 'not-root'."
   exit 1
 fi
 if [ -z "$DOCKERHOST" ]; then
-  >&2 echo "Please make sure the DOCKERHOST environment variable exists, with something like 'docker.example.com'."
+  >&2 echo "$SCRIPT: Please make sure the DOCKERHOST environment variable exists, with something like 'docker.example.com'."
   exit 1
 fi
 
