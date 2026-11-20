@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/dcycle/docker-acquia-cli.svg?style=svg)](https://circleci.com/gh/dcycle/acquia-cli)
+[![GitHub Actions](https://github.com/dcycle/acquia-cli/actions/workflows/config.yml/badge.svg)](https://github.com/dcycle/acquia-cli/actions/workflows/config.yml)
 
 Dockerized version of [Acquia Cli](https://docs.acquia.com/acquia-cli/).
 

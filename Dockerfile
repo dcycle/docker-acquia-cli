@@ -1,5 +1,7 @@
 FROM alpine
 
+RUN apk add --no-cache php85-iconv
+
 COPY docker-resources /docker-resources
 
 RUN cd /docker-resources && ./build.sh && rm -rf /docker-resources
